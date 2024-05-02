@@ -1,0 +1,208 @@
+<div class="bg-gray-100 h-screen w-screen">
+  <div
+    class="py-10 flex space-x-8 justify-center items-start mx-20"
+  >
+    <!-- Create New Employee -->
+    <div id="employeeForm" class="flex-auto max-w-screen-lg bg-white rounded-lg shadow-xl overflow-hidden ">
+      <div class="flex justify-between items-center px-4 py-4 bg-slate-700">
+        <h3 class=" text-lg leading-6 font-medium text-white">
+          Create New-Ticket
+        </h3>
+
+      </div>
+      <div class="px-5 py-6 bg-white space-y-6">
+        <form action="#" method="POST">
+          <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+            <div class="sm:col-span-2">
+              <label
+                for="employee_id"
+                class="block text-sm font-medium text-gray-700"
+                >Employee ID</label
+              >
+              <input
+                type="number"
+                min="1"
+                max="1000000"
+                name="employee_id"
+                id="employee_id"
+                autocomplete="employee-id"
+                [(ngModel)] = "employeeId"
+                required
+                disabled
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+            </div>
+            <div class="sm:col-span-4">
+              <label
+                for="employee_name"
+                class="block text-sm font-medium text-gray-700"
+                >Employee Name</label
+              >
+              <input
+                type="text"
+                required
+                [(ngModel)] = "employeeName"
+                name="employee_name"
+                id="employee_name"
+                autocomplete="employee-name"
+                disabled
+                class="uppercase mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+            </div>
+            <div class="sm:col-span-2">
+              <label
+                for="customer_name"
+                class="block text-sm font-medium text-gray-700"
+                >Customer Name *</label
+              >
+              <input
+                type="text"
+                required
+                [(ngModel)] = "userInputCustomerName"
+                name="customer_name"
+                id="customer_name"
+                autocomplete="customer-name"
+                class="uppercase mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+            </div>
+            <div class="sm:col-span-1">
+              <label
+                for="contact_no"
+                class="block text-sm font-medium text-gray-700"
+                >Customer Contact No *</label
+              >
+              <input
+                type="number"
+                min="0000000000"
+                max="9999999999"
+                name="contact_no"
+                id="contact_no"
+                autocomplete="contact-no"
+                required
+                [(ngModel)] = "userInputCustomerContactNo"
+                (keyup) = "checkContactNo()"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+              <div *ngIf="contactNoError" class="text-red-600 text-sm mt-1">
+                Requires 10 digit No.
+              </div>
+            </div>
+            <div class="sm:col-span-2">
+              <label
+                for="emailId"
+                class="block text-sm font-medium text-gray-700"
+                >Customer EmailId *</label>
+              <input
+                type="email"
+                required
+                [(ngModel)] = "userInputCustomerEmailAddress"
+                (keyup) = "checkEmail()"
+                name="emailId"
+                id="emailId"
+                autocomplete="emailId"
+                class="uppercase mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+              <div *ngIf="emailError" class="text-red-600 text-sm mt-1">
+                Email Incorrect or Already Exists.
+              </div>
+            </div>
+            <div class="sm:col-span-1">
+              <label
+                for="severity"
+                class="block text-sm font-medium text-gray-700"
+                >Severity *</label>
+              <select
+                id="severity"
+                required
+                [(ngModel)] = "userSelectedSeverity"
+                name="severity"
+                autocomplete="severity"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              >
+                <option value="">--Select--</option>
+                <option value="LOW">LOW</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="HIGH">HIGH</option>
+                <!-- <option *ngFor="let emp of allEmployeeDetails" [value]="emp.employeeId">{{emp.employeeName}} </option> -->
+                <!-- Department head options will be inserted here -->
+              </select>
+            </div>
+            <div class="sm:col-span-2">
+              <label
+                for="department_id"
+                class="block text-sm font-medium text-gray-700"
+                >Department ID</label
+              >
+              <input
+                type="number"
+                min="1"
+                max="1000"
+                name="department_id"
+                id="department_id"
+                autocomplete="department-id"
+                required
+                [(ngModel)] = "userSelectedDepartmentId"
+                disabled
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+            </div>
+            <div class="sm:col-span-4">
+              <label
+                for="department_name"
+                class="block text-sm font-medium text-gray-700"
+                >Department Name *</label>
+              <select
+                id="department_name"
+                required
+                [(ngModel)] = "userSelectedDepartmentId"
+                (click)="setDepartmentName()"
+                (keyup)="setDepartmentName()"
+                name="department_name"
+                autocomplete="department_name"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              >
+                <option value=0>--Select Department--</option>
+                <option *ngFor="let dept of allDepartmentDetails" [value]="dept.deptId">{{dept.deptName}} </option>
+                <!-- Department head options will be inserted here -->
+              </select>
+            </div>
+
+            <div class="sm:col-span-6">
+              <label
+                for="ticketDetails"
+                class="block text-sm font-medium text-gray-700"
+                >Ticket Details *</label>
+              <textarea
+                required
+                [(ngModel)] = "userInputTicketDetails"
+                name="ticketDetails"
+                id="ticketDetails"
+                autocomplete="ticketDetails"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              ></textarea>
+            </div>
+          </div>
+          <div class="px-4 py-2 mt-5 -mb-3 bg-white text-right sm:px-6">
+            <button
+              type="reset"
+              (click)="resetFormData()"
+              class="inline-flex justify-center py-2 px-3 mr-2 border border-gray-400 shadow-sm text-sm font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            >
+              Reset
+            </button>
+            <button
+              type="button"
+              (click) = "onSaveClick()"
+              class="inline-flex justify-center py-2 px-4 -mr-6 border border-transparent shadow-sm text-sm font-medium rounded-xl text-white bg-green-700   focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              [class.hover:bg-green-800]="!(emailError || contactNoError)"
+              [class.bg-gray-200]="emailError || contactNoError"
+
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

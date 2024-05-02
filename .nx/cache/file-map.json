@@ -1,0 +1,319 @@
+{
+  "version": "6.0",
+  "nxVersion": "18.3.3",
+  "deps": {
+    "@angular/animations": "^17.3.0",
+    "@angular/cdk": "^17.3.5",
+    "@angular/common": "^17.3.0",
+    "@angular/compiler": "^17.3.0",
+    "@angular/core": "^17.3.0",
+    "@angular/forms": "^17.3.0",
+    "@angular/platform-browser": "^17.3.0",
+    "@angular/platform-browser-dynamic": "^17.3.0",
+    "@angular/router": "^17.3.0",
+    "@spartan-ng/ui-core": "^0.0.1-alpha.344",
+    "json-server": "^1.0.0-alpha.23",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.3",
+    "@angular-devkit/build-angular": "^17.3.4",
+    "@angular/cli": "^17.3.4",
+    "@angular/compiler-cli": "^17.3.0",
+    "@spartan-ng/cli": "^0.0.1-alpha.346",
+    "@types/jasmine": "~5.1.0",
+    "autoprefixer": "^10.4.19",
+    "jasmine-core": "~5.1.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "typescript": "~5.4.2"
+  },
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {
+      "org-ticket-system": [
+        {
+          "file": ".editorconfig",
+          "hash": "17241496168097493888"
+        },
+        {
+          "file": ".gitignore",
+          "hash": "4689145951703824387"
+        },
+        {
+          "file": ".vscode/extensions.json",
+          "hash": "11934160580685414355"
+        },
+        {
+          "file": ".vscode/launch.json",
+          "hash": "17406702432687230417"
+        },
+        {
+          "file": ".vscode/tasks.json",
+          "hash": "10093397977228577162"
+        },
+        {
+          "file": "README.md",
+          "hash": "18345697313727471481"
+        },
+        {
+          "file": "angular.json",
+          "hash": "3315784106319881918"
+        },
+        {
+          "file": "db.json",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "package-lock.json",
+          "hash": "640992187432660348"
+        },
+        {
+          "file": "package.json",
+          "hash": "2564780697306337768",
+          "deps": [
+            "npm:@angular/animations",
+            "npm:@angular/cdk",
+            "npm:@angular/common",
+            "npm:@angular/compiler",
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/platform-browser",
+            "npm:@angular/platform-browser-dynamic",
+            "npm:@angular/router",
+            "npm:@spartan-ng/ui-core",
+            "npm:json-server",
+            "npm:rxjs",
+            "npm:tslib",
+            "npm:zone.js",
+            "npm:@angular-devkit/build-angular",
+            "npm:@angular/cli",
+            "npm:@angular/compiler-cli",
+            "npm:@spartan-ng/cli",
+            "npm:@types/jasmine",
+            "npm:autoprefixer",
+            "npm:jasmine-core",
+            "npm:karma",
+            "npm:karma-chrome-launcher",
+            "npm:karma-coverage",
+            "npm:karma-jasmine",
+            "npm:karma-jasmine-html-reporter",
+            "npm:postcss",
+            "npm:tailwindcss",
+            "npm:typescript"
+          ]
+        },
+        {
+          "file": "src/app/app.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/app.component.html",
+          "hash": "17385897758380840601"
+        },
+        {
+          "file": "src/app/app.component.spec.ts",
+          "hash": "9411522901785005798"
+        },
+        {
+          "file": "src/app/app.component.ts",
+          "hash": "15364309267098999929"
+        },
+        {
+          "file": "src/app/app.config.ts",
+          "hash": "6889579585540215034"
+        },
+        {
+          "file": "src/app/app.routes.ts",
+          "hash": "2784021481023814138"
+        },
+        {
+          "file": "src/app/core/constant/Constant.ts",
+          "hash": "18330897137794290377"
+        },
+        {
+          "file": "src/app/core/models/API.Model.ts",
+          "hash": "8964992647968586341"
+        },
+        {
+          "file": "src/app/core/services/department.service.spec.ts",
+          "hash": "15600808757153945299"
+        },
+        {
+          "file": "src/app/core/services/department.service.ts",
+          "hash": "511313356934390652"
+        },
+        {
+          "file": "src/app/core/services/employee.service.spec.ts",
+          "hash": "3461775389778551104"
+        },
+        {
+          "file": "src/app/core/services/employee.service.ts",
+          "hash": "9522595922177142195"
+        },
+        {
+          "file": "src/app/pages/dashboard/dashboard.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/pages/dashboard/dashboard.component.html",
+          "hash": "6289448167366289805"
+        },
+        {
+          "file": "src/app/pages/dashboard/dashboard.component.spec.ts",
+          "hash": "6804448429088905631"
+        },
+        {
+          "file": "src/app/pages/dashboard/dashboard.component.ts",
+          "hash": "13676605973983268785"
+        },
+        {
+          "file": "src/app/pages/department/department.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/pages/department/department.component.html",
+          "hash": "15646179744302135538"
+        },
+        {
+          "file": "src/app/pages/department/department.component.spec.ts",
+          "hash": "7440874063916742592"
+        },
+        {
+          "file": "src/app/pages/department/department.component.ts",
+          "hash": "2507573485326927552"
+        },
+        {
+          "file": "src/app/pages/employee/employee.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/pages/employee/employee.component.html",
+          "hash": "16474183107921613780"
+        },
+        {
+          "file": "src/app/pages/employee/employee.component.spec.ts",
+          "hash": "6134665778607205717"
+        },
+        {
+          "file": "src/app/pages/employee/employee.component.ts",
+          "hash": "17102914544600553137"
+        },
+        {
+          "file": "src/app/pages/layout/layout.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/pages/layout/layout.component.html",
+          "hash": "17000180016079602601"
+        },
+        {
+          "file": "src/app/pages/layout/layout.component.spec.ts",
+          "hash": "12081593042144840889"
+        },
+        {
+          "file": "src/app/pages/layout/layout.component.ts",
+          "hash": "12220150469463528166"
+        },
+        {
+          "file": "src/app/pages/login/login.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/pages/login/login.component.html",
+          "hash": "13821993429062658172"
+        },
+        {
+          "file": "src/app/pages/login/login.component.spec.ts",
+          "hash": "6185592977640098781"
+        },
+        {
+          "file": "src/app/pages/login/login.component.ts",
+          "hash": "17360974244033072585"
+        },
+        {
+          "file": "src/app/pages/new-ticket/new-ticket.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/pages/new-ticket/new-ticket.component.html",
+          "hash": "7523937841397862952"
+        },
+        {
+          "file": "src/app/pages/new-ticket/new-ticket.component.spec.ts",
+          "hash": "6021052217822381844"
+        },
+        {
+          "file": "src/app/pages/new-ticket/new-ticket.component.ts",
+          "hash": "8195646711037589422"
+        },
+        {
+          "file": "src/app/pages/tickets/tickets.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/pages/tickets/tickets.component.html",
+          "hash": "5491862574923639155"
+        },
+        {
+          "file": "src/app/pages/tickets/tickets.component.spec.ts",
+          "hash": "13475515124484740935"
+        },
+        {
+          "file": "src/app/pages/tickets/tickets.component.ts",
+          "hash": "6457817062457638495"
+        },
+        {
+          "file": "src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/environments/environment.development.ts",
+          "hash": "9957820654879521308"
+        },
+        {
+          "file": "src/environments/environment.ts",
+          "hash": "9957820654879521308"
+        },
+        {
+          "file": "src/favicon.ico",
+          "hash": "3988961587069885523"
+        },
+        {
+          "file": "src/index.html",
+          "hash": "3108727260850532670"
+        },
+        {
+          "file": "src/main.ts",
+          "hash": "4169901790405087765"
+        },
+        {
+          "file": "src/styles.css",
+          "hash": "17184606368497813864"
+        },
+        {
+          "file": "tailwind.config.js",
+          "hash": "15246545215305940201"
+        },
+        {
+          "file": "tsconfig.app.json",
+          "hash": "13119632651406065538"
+        },
+        {
+          "file": "tsconfig.json",
+          "hash": "3200458784466797971"
+        },
+        {
+          "file": "tsconfig.spec.json",
+          "hash": "5122839733245053999"
+        }
+      ]
+    },
+    "nonProjectFiles": []
+  }
+}

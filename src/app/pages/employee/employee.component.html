@@ -1,0 +1,335 @@
+<div class="bg-gray-100 h-screen w-screen">
+  <div
+    class="py-10 flex space-x-8 justify-center items-start mx-20"
+  >
+    <!-- Employee List -->
+    <div class="flex-auto max-w-screen-xl bg-white rounded-lg shadow-xl overflow-hidden">
+      <div class="flex justify-between items-center px-4 bg-slate-700">
+        <h3 class="text-lg ml-3 leading-6 font-medium text-white">
+          Employee List
+        </h3>
+        <button
+                  type="button"
+                  (click) = "openEmployeeForm()"
+                  class="inline-flex justify-center py-2 px-4 mr-2 my-5 border border-transparent shadow-sm text-sm font-medium rounded-2xl text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                >
+                  Add Employee
+                </button>
+      </div>
+      <div class="border-t border-gray-200 max-h-[calc(90vh-10rem)] overflow-y-auto">
+        <table class="w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Sr No
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Employee Id
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Employee Name
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Role
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Department Id
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Department Name
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Contact No.
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Email Address
+              </th>
+
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200 my-30 flex-grow overflow-y-auto ">
+            <!-- Dynamic rows will be inserted here -->
+            <tr *ngFor="let emp of allEmployeeDetails; let srNo = index" >
+              <td
+                class="text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ srNo + 1 }}
+              </td>
+              <td
+                class="text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ emp.employeeId | na }}
+              </td>
+              <td
+                class="text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ emp.employeeName | na}}
+              </td>
+              <td
+                class="text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ emp.role | na }}
+              </td>
+              <td
+                class="text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ emp.deptId | na }}
+              </td>
+              <td
+                class="text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ emp.deptName | na }}
+              </td>
+              <td
+                class="text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ emp.contactNo | na }}
+              </td>
+              <td
+                class="text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ emp.emailId | na }}
+              </td>
+
+              <td
+                class="text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                <button
+                  type="button"
+                  (click) = "onEditClicked(emp)"
+                  class="inline-flex justify-center py-2 px-4 mr-2 my-5 border border-transparent shadow-sm text-sm font-medium rounded-2xl text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  (click) = "onDeleteClicked(emp)"
+                  class="inline-flex justify-center py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-2xl text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Create New Employee -->
+    <div id="employeeForm" class="hidden flex-auto w-40 bg-white rounded-lg shadow-xl overflow-hidden ">
+      <div class="flex justify-between items-center px-4 py-4 bg-slate-700">
+        <h3 *ngIf="editClicked === false" class=" text-lg leading-6 font-medium text-white">
+          Create New Employee
+        </h3>
+        <h3 *ngIf="editClicked === true" class=" text-lg leading-6 font-medium text-white">
+          Update Employee
+        </h3>
+        <button
+                  type="button"
+                  (click) = "closeEmployeeForm()"
+                  class="inline-flex justify-center text-center py-1 px-3 mr-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                >
+                  X
+                </button>
+      </div>
+      <div class="px-5 py-6 bg-white space-y-6">
+        <form action="#" method="POST">
+          <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+            <div class="sm:col-span-2">
+              <label
+                for="employee_id"
+                class="block text-sm font-medium text-gray-700"
+                >Employee ID</label
+              >
+              <input
+                type="number"
+                min="1"
+                max="1000000"
+                name="employee_id"
+                id="employee_id"
+                autocomplete="employee-id"
+                required
+                [(ngModel)] = "userInputEmployeeId"
+                (keyup) = "checkEmployeeId()"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+              <div *ngIf="employeeIdExists" class="text-red-600 text-sm mt-1">
+                ID already exists.
+              </div>
+            </div>
+            <div class="sm:col-span-4">
+              <label
+                for="employee_name"
+                class="block text-sm font-medium text-gray-700"
+                >Employee Name</label
+              >
+              <input
+                type="text"
+                required
+                [(ngModel)] = "userInputEmployeeName"
+                name="employee_name"
+                id="employee_name"
+                autocomplete="employee-name"
+                class="uppercase mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+            </div>
+            <div class="sm:col-span-2">
+              <label
+                for="department_id"
+                class="block text-sm font-medium text-gray-700"
+                >Department ID</label
+              >
+              <input
+                type="number"
+                min="1"
+                max="1000"
+                name="department_id"
+                id="department_id"
+                autocomplete="department-id"
+                required
+                [(ngModel)] = "userSelectedDepartmentId"
+                disabled
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+            </div>
+            <div class="sm:col-span-4">
+              <label
+                for="department_name"
+                class="block text-sm font-medium text-gray-700"
+                >Department Name</label>
+              <select
+                id="department_name"
+                required
+                [(ngModel)] = "userSelectedDepartmentId"
+                (click)="setDepartmentName()"
+                (keyup)="setDepartmentName()"
+                name="department_name"
+                autocomplete="department_name"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              >
+                <option value=0>--Select Department--</option>
+                <option *ngFor="let dept of loggedDepartmentList" [value]="dept.deptId">{{dept.deptName}} </option>
+                <!-- Department head options will be inserted here -->
+              </select>
+            </div>
+            <div class="sm:col-span-3">
+              <label
+                for="contact_no"
+                class="block text-sm font-medium text-gray-700"
+                >Contact No</label
+              >
+              <input
+                type="number"
+                min="0000000000"
+                max="9999999999"
+                name="contact_no"
+                id="contact_no"
+                autocomplete="contact-no"
+                required
+                [(ngModel)] = "userInputContactNo"
+                (keyup) = "checkContactNo()"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+              <div *ngIf="contactNoError" class="text-red-600 text-sm mt-1">
+                Requires 10 digit Mobile No.
+              </div>
+            </div>
+
+            <div class="sm:col-span-3">
+              <label
+                for="role"
+                class="block text-sm font-medium text-gray-700"
+                >Role</label>
+              <select
+                id="role"
+                required
+                [(ngModel)] = "userSelectedRole"
+                name="role"
+                autocomplete="role"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              >
+                <option value="">--Select Role--</option>
+                <option *ngIf="loggedInUser.role == 'ADMIN' && userSelectedDepartmentName === 'ADMIN'" value="ADMIN">ADMIN</option>
+                <option *ngIf="(loggedInUser.role == 'ADMIN' || loggedInUser.role === 'DEPARTMENT HEAD') && (userSelectedDepartmentName !== 'ADMIN')" value="DEPARTMENT HEAD">DEPARTMENT HEAD</option>
+                <option *ngIf="(loggedInUser.role == 'ADMIN' || loggedInUser.role === 'DEPARTMENT HEAD' || loggedInUser.role === 'EMPLOYEE') && (userSelectedDepartmentName !== 'ADMIN')" value="EMPLOYEE">EMPLOYEE</option>
+                <!-- <option *ngFor="let emp of allEmployeeDetails" [value]="emp.employeeId">{{emp.employeeName}} </option> -->
+                <!-- Department head options will be inserted here -->
+              </select>
+            </div>
+            <div class="sm:col-span-6">
+              <label
+                for="emailId"
+                class="block text-sm font-medium text-gray-700"
+                >Email Address</label>
+              <input
+                type="email"
+                required
+                [(ngModel)] = "userInputEmailAddress"
+                (keyup) = "checkEmail()"
+                name="emailId"
+                id="emailId"
+                autocomplete="emailId"
+                class="uppercase mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+              <div *ngIf="emailError" class="text-red-600 text-sm mt-1">
+                Email Incorrect or Already Exists.
+              </div>
+            </div>
+          </div>
+          <div class="px-4 py-2 mt-5 -mb-3 bg-white text-right sm:px-6">
+            <button
+              type="reset"
+              (click)="resetFormData()"
+              class="inline-flex justify-center py-2 px-3 mr-2 border border-gray-400 shadow-sm text-sm font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            >
+              Reset
+            </button>
+            <button
+              type="button"
+              *ngIf="editClicked === false"
+              [disabled] = "emailError || contactNoError || employeeIdExists"
+              (click) = "onSaveClick()"
+              class="inline-flex justify-center py-2 px-4 -mr-6 border border-transparent shadow-sm text-sm font-medium rounded-xl text-white bg-green-700   focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              [class.hover:bg-green-800]="!(emailError || contactNoError || employeeIdExists)"
+              [class.bg-gray-200]="emailError || contactNoError || employeeIdExists"
+
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              *ngIf="editClicked === true"
+              [disabled] = "emailError || contactNoError || employeeIdExists"
+              (click) = "onUpdateClick()"
+              class="inline-flex justify-center py-2 px-4 -mr-6 border border-transparent shadow-sm text-sm font-medium rounded-xl text-white bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              [class.hover:bg-green-800]="!(emailError || contactNoError || employeeIdExists)"
+            >
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,218 @@
+<div class="bg-gray-100 h-screen w-screen">
+  <div
+    class="py-10 flex space-x-8 justify-center items-start mx-40"
+  >
+    <!-- Department List -->
+    <div class="flex-auto max-w-screen-xl bg-white rounded-lg shadow-xl overflow-hidden">
+      <div class="flex justify-between items-center px-7 bg-slate-700">
+        <h3 class="text-lg leading-6 font-medium text-white">
+          Department List
+        </h3>
+        <button
+                  type="button"
+                  (click) = "openDepartmentForm()"
+                  class="inline-flex justify-center py-2 px-4 mr-2 my-5 border border-transparent shadow-sm text-sm font-medium rounded-2xl text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                >
+                  Add Department
+                </button>
+      </div>
+      <div class="border-t border-gray-200 max-h-[calc(90vh-10rem)] overflow-y-auto">
+        <table class="w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Sr No
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Department Id
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Department Name
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Department Head
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200 my-30 flex-grow overflow-y-auto ">
+            <!-- Dynamic rows will be inserted here -->
+            <tr *ngFor="let dept of allDepartmentDetails; let srNo = index" >
+              <td
+                class="text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ srNo + 1 }}
+              </td>
+              <td
+                class="text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ dept.deptId | na }}
+              </td>
+              <td
+                class="text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ dept.deptName | na}}
+              </td>
+              <td
+                class="text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ dept.deptHeadName | na }}
+              </td>
+              <td
+                class="text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                <button
+                  type="button"
+                  (click) = "onEditClicked(dept)"
+                  class="inline-flex justify-center py-2 px-4 mr-5 my-5 border border-transparent shadow-sm text-sm font-medium rounded-2xl text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  (click) = "onDeleteClicked(dept)"
+                  *ngIf ="dept.deptName.toUpperCase() !== 'ADMIN'"
+                  class="inline-flex justify-center py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-2xl text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Create New Department -->
+    <div id="deptForm" class="hidden flex-auto w-10 bg-white rounded-lg shadow-xl overflow-hidden ">
+      <div class="flex justify-between items-center px-4 py-4 bg-slate-700">
+        <h3 *ngIf="editClicked === false" class="text-lg leading-6 font-medium text-white">
+          Create New Department
+        </h3>
+        <h3 *ngIf="editClicked === true" class="text-lg leading-6 font-medium text-white">
+          Update Department
+        </h3>
+        <button
+                  type="button"
+                  (click) = "closeDepartmentForm()"
+                  class="inline-flex justify-center text-center py-1 px-3 mr-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                >
+                  X
+                </button>
+      </div>
+      <div class="px-5 py-6 bg-white space-y-6">
+        <form action="#" method="POST">
+          <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+            <div class="sm:col-span-6">
+              <label
+                for="department_name"
+                class="block text-sm font-medium text-gray-700"
+                >Department ID</label
+              >
+              <input
+                type="number"
+                min="1"
+                max="1000"
+                name="department_id"
+                id="department_id"
+                autocomplete="department-id"
+                required
+                [(ngModel)] = "userInputDepartmentId"
+                (keyup) = "checkDepartmentId()"
+                [disabled]="userInputDepartmentId == 100"
+                [ngClass]="{'bg-gray-300': userInputDepartmentId == 100}"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300  rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+              <div *ngIf="departmentIdExists" class="text-red-600 text-sm mt-1">
+                Department ID already exists.
+              </div>
+            </div>
+            <div class="sm:col-span-6">
+              <label
+                for="department_name"
+                class="block text-sm font-medium text-gray-700"
+                >Department Name</label
+              >
+              <input
+                type="text"
+                required
+                [(ngModel)] = "userInputDepartmentName"
+                (keyup) = "checkDepartmentName()"
+                [disabled]="userInputDepartmentName.toUpperCase() === 'ADMIN'"
+                [ngClass]="{'bg-gray-300': userInputDepartmentName.toUpperCase() === 'ADMIN'}"
+                name="department_name"
+                id="department_name"
+                autocomplete="department-name"
+                class="uppercase mt-1 block w-full py-2 px-3 border border-gray-300  rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+              <div *ngIf="departmentNameExists" class="text-red-600 text-sm mt-1">
+                Department name already exists.
+              </div>
+            </div>
+
+            <div class="sm:col-span-6">
+              <label
+                for="department_head"
+                class="block text-sm font-medium text-gray-700"
+                >Select Department Head</label
+              >
+              <select
+                id="department_head"
+                required
+                [(ngModel)] = "userInputDepartmentHeadId"
+                name="department_head"
+                autocomplete="department-head"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              >
+                <option value = 0 >--Please choose an option--</option>
+                <option *ngFor="let emp of employeesOnly" [value]="emp.employeeId">{{emp.employeeName}} </option>
+                <!-- Department head options will be inserted here -->
+              </select>
+            </div>
+          </div>
+          <div class="px-4 py-2 mt-5 -mb-3 bg-white text-right sm:px-6">
+            <button
+              type="reset"
+              (click)="resetFormData()"
+              class="inline-flex justify-center py-2 px-3 mr-2 border border-gray-400 shadow-sm text-sm font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            >
+              Reset
+            </button>
+            <button
+              type="button"
+              *ngIf="editClicked === false"
+              [disabled] = "departmentNameExists || departmentIdExists"
+              (click) = "onSaveClick()"
+              class="inline-flex justify-center py-2 px-4 -mr-6 border border-transparent shadow-sm text-sm font-medium rounded-xl text-white bg-green-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              [class.hover:bg-green-800]="!(departmentNameExists || departmentIdExists)"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              *ngIf="editClicked === true"
+              [disabled] = "departmentNameExists || departmentIdExists"
+              (click) = "onUpdateClick()"
+              class="inline-flex justify-center py-2 px-4 -mr-6 border border-transparent shadow-sm text-sm font-medium rounded-xl text-white bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              [class.hover:bg-green-800]="!(departmentNameExists || departmentIdExists)"
+            >
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

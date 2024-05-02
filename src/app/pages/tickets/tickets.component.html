@@ -1,0 +1,501 @@
+<div class="bg-gray-100 h-screen w-screen">
+  <div class="py-10 flex space-x-8 justify-center items-start mx-20">
+    <!-- Ticket List -->
+    <div
+      id="ticketListDiv"
+      class="flex-auto max-w-screen-2xl bg-white rounded-lg shadow-xl overflow-hidden"
+    >
+      <div class="flex justify-between items-center py-4 px-4 bg-slate-700">
+        <h3 class="text-lg ml-3 leading-6 font-medium text-white">
+          Tickets List
+        </h3>
+
+      </div>
+      <div
+        class="border-t border-gray-200 max-h-[calc(90vh-10rem)] overflow-y-auto"
+      >
+        <table class="w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Sr No
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Ticket Id
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Created By Emp
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Created By Dept
+              </th>
+
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Assigned Emp
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Assigned Dept
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Customer Name
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Customer Contact No
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Customer Email
+              </th>
+              <!-- <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Ticket Details
+              </th> -->
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Severity
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                State
+              </th>
+              <th
+                class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider"
+              >
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="bg-white divide-y divide-gray-200 my-30 flex-grow overflow-y-auto"
+          >
+            <!-- Dynamic rows will be inserted here -->
+            <tr *ngFor="let ticket of allTicketDetails; let srNo = index">
+              <td
+                class="text-center border-t border-gray-800 text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ srNo + 1 }}
+              </td>
+              <td
+                class="text-center border-t border-gray-800 text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ ticket.ticketId | na }}
+              </td>
+              <td
+                class="text-center border-t border-gray-800 text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ getEmployeeNameById(ticket.createdByEmp) | na }}
+              </td>
+              <td
+                class="text-center border-t border-gray-800 text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ getDeptNameById(ticket.createdByDept) | na }}
+              </td>
+
+              <td
+                class="text-center border-t border-gray-800 text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ getEmployeeNameById(ticket.assignedEmp) | na }}
+              </td>
+              <td
+                class="text-center border-t border-gray-800 text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ getDeptNameById(ticket.assignedDept) | na }}
+              </td>
+              <td
+                class="text-center border-t border-gray-800 text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ ticket.customerName | na }}
+              </td>
+              <td
+                class="text-center border-t border-gray-800 text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ ticket.customerContactNo | na }}
+              </td>
+              <td
+                class="text-center border-t border-gray-800 text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ ticket.customerEmail | na }}
+              </td>
+              <!-- <td
+                class="text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ ticket.ticketDetails | na }}
+              </td> -->
+              <td
+                class="text-center border-t border-gray-800 text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ ticket.severity | na }}
+              </td>
+              <td
+                class="text-center border-t border-gray-800 text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                {{ ticket.state | na }}
+              </td>
+
+              <td
+                class="text-center border-t border-gray-800 text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                <!-- <button
+                  type="button"
+                  (click)="onAssignClicked(ticket)"
+                  *ngIf="
+                    loggedInUser.role.toUpperCase() === 'ADMIN' ||
+                    loggedInUser.role.toUpperCase() === 'DEPARTMENT HEAD'
+                  "
+                  class="inline-flex justify-center py-2 px-2 mr-2 my-5 border border-transparent shadow-sm text-sm font-medium rounded-2xl text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                >
+                  Assign
+                </button> -->
+                <button
+                  type="button"
+                  (click)="onStartClicked(ticket)"
+                  *ngIf="ticket.state.toUpperCase() === 'ASSIGNED'"
+                  class="inline-flex justify-center py-2 px-4 mr-2 my-5 border border-transparent shadow-sm text-sm font-medium rounded-2xl text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                >
+                  Start
+                </button>
+                <button
+                  type="button"
+                  (click) = "onCloseClicked(ticket)"
+                  *ngIf = "ticket.state.toUpperCase() === 'IN-PROGRESS' || loggedInUser.role.toUpperCase() !== 'EMPLOYEE'"
+                  class="inline-flex justify-center py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-2xl text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  (click)="onEditClicked(ticket)"
+                  *ngIf = "loggedInUser.role.toUpperCase() === 'ADMIN' || loggedInUser.role.toUpperCase() === 'DEPARTMENT HEAD'"
+                  class="inline-flex justify-center py-2 px-4 mr-2 my-5 border border-transparent shadow-sm text-sm font-medium rounded-2xl text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  (click)="onDeleteClicked(ticket)"
+                  *ngIf = "loggedInUser.role.toUpperCase() === 'ADMIN' || loggedInUser.role.toUpperCase() === 'DEPARTMENT HEAD'"
+                  class="inline-flex justify-center py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-2xl text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Create New Employee -->
+    <div id="TicketForm" class="hidden flex-auto max-w-screen-lg bg-white rounded-lg shadow-xl overflow-hidden ">
+      <div class="flex justify-between items-center px-4 py-4 bg-slate-700">
+        <h3 *ngIf="editClicked"  class=" text-lg leading-6 font-medium text-white">
+          Update Ticket
+        </h3>
+        <h3 *ngIf="assignClicked" class=" text-lg leading-6 font-medium text-white">
+          Assign Ticket
+        </h3>
+        <button
+                  type="button"
+                  (click) = "closeTicketForm()"
+                  class="inline-flex justify-center text-center py-1 px-3 mr-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                >
+                  X
+                </button>
+      </div>
+      <div class="px-5 py-6 bg-white space-y-6">
+        <form action="#" method="POST">
+          <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+            <div class="sm:col-span-2">
+              <label
+                for="ticket_id"
+                class="block text-sm font-medium text-gray-700"
+                >Ticket ID</label
+              >
+              <input
+                type="number"
+                min="1"
+                max="NUMBER.MAX_SAFE_INTEGER"
+                name="ticket_id"
+                id="ticket_id"
+                autocomplete="ticket-id"
+                [(ngModel)] = "formTicketId"
+                required
+                [disabled] = "assignClicked === true"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+            </div>
+            <div class="sm:col-span-2">
+              <label
+                for="created_employee_name"
+                class="block text-sm font-medium text-gray-700"
+                >Created By Employee</label
+              >
+              <input
+                type="text"
+                required
+                [(ngModel)] = "formCreatedByEmployeeName"
+                name="created_employee_name"
+                id="created_employee_name"
+                autocomplete="created-employee-name"
+                [disabled] = "assignClicked === true"
+                class="uppercase mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+            </div>
+            <div class="sm:col-span-2">
+              <label
+                for="created_dept_name"
+                class="block text-sm font-medium text-gray-700"
+                >Created By Dept</label
+              >
+              <input
+                type="text"
+                required
+                [(ngModel)] = "formCreatedByDeptName"
+                name="created_dept_name"
+                id="created_dept_name"
+                autocomplete="created-dept-name"
+                [disabled] = "assignClicked === true"
+                class="uppercase mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+            </div>
+            <div class="sm:col-span-2">
+              <label
+                for="assigned_employee_name"
+                class="block text-sm font-medium text-gray-700"
+                >Assigned Employee *</label
+              >
+              <select
+                id="assigned_employee_name"
+                required
+                [(ngModel)] = "formSelectedAssignToEmployeeId"
+                (click)="setAssignedEmployeeMenu()"
+                (keyup)="setAssignedEmployeeMenu()"
+                name="assigned_employee_name"
+                autocomplete="assigned_employee_name"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              >
+                <option value=''>--Select Employee--</option>
+                <option *ngFor="let emp of selectedDeptEmpList" [value]="emp.employeeId">{{emp.employeeName}} </option>
+                <!-- Employee in ticket assigned department options will be inserted here -->
+              </select>
+            </div>
+            <div class="sm:col-span-2">
+              <label
+                for="assigned_dept_name"
+                class="block text-sm font-medium text-gray-700"
+                >Assigned Dept</label
+              >
+              <input
+                type="text"
+                required
+                [(ngModel)] = "formAssignedDeptName"
+                name="assigned_dept_name"
+                id="assigned_dept_name"
+                autocomplete="assigned-dept-name"
+                [disabled] = "assignClicked === true"
+                class="uppercase mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+            </div>
+            <div class="sm:col-span-1">
+              <label
+                for="severity"
+                class="block text-sm font-medium text-gray-700"
+                >Severity *</label>
+              <select
+                id="severity"
+                required
+                [(ngModel)] = "formSeverity"
+                name="severity"
+                autocomplete="severity"
+                [disabled] = "assignClicked === true"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              >
+                <option value="">--Select--</option>
+                <option value="LOW">LOW</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="HIGH">HIGH</option>
+                <!-- <option *ngFor="let emp of allEmployeeDetails" [value]="emp.employeeId">{{emp.employeeName}} </option> -->
+                <!-- Department head options will be inserted here -->
+              </select>
+            </div>
+            <div class="sm:col-span-1">
+              <label
+                for="state"
+                class="block text-sm font-medium text-gray-700"
+                >State *</label>
+              <select
+                id="state"
+                required
+                [(ngModel)] = "formState"
+                name="state"
+                autocomplete="state"
+                [disabled] = "assignClicked === true"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              >
+                <option value="">--Select--</option>
+                <option value="UNASSIGNED">UNASSIGNED</option>
+                <option value="ASSIGNED">ASSIGNED</option>
+                <option value="IN-PROGRESS">IN-PROGRESS</option>
+                <option value="CLOSE">CLOSE</option>
+                <!-- <option *ngFor="let emp of allEmployeeDetails" [value]="emp.employeeId">{{emp.employeeName}} </option> -->
+                <!-- Department head options will be inserted here -->
+              </select>
+            </div>
+            <div class="sm:col-span-2">
+              <label
+                for="customer_name"
+                class="block text-sm font-medium text-gray-700"
+                >Customer Name *</label
+              >
+              <input
+                type="text"
+                required
+                [(ngModel)] = "formCustomerName"
+                name="customer_name"
+                id="customer_name"
+                autocomplete="customer-name"
+                disabled
+                class="uppercase mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+            </div>
+            <div class="sm:col-span-1">
+              <label
+                for="contact_no"
+                class="block text-sm font-medium text-gray-700"
+                >Customer Contact No *</label
+              >
+              <input
+                type="number"
+                min="0000000000"
+                max="9999999999"
+                name="contact_no"
+                id="contact_no"
+                autocomplete="contact-no"
+                required
+                [(ngModel)] = "formCustomerContactNo"
+                disabled
+                class="uppercase mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+            </div>
+            <div class="sm:col-span-2">
+              <label
+                for="emailId"
+                class="block text-sm font-medium text-gray-700"
+                >Customer Email Address *</label>
+              <input
+                type="email"
+                required
+                [(ngModel)] = "formCustomerEmail"
+                name="emailId"
+                id="emailId"
+                autocomplete="emailId"
+                disabled
+                class="uppercase mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+
+            </div>
+            <div class="sm:col-span-2">
+              <label
+                for="created_date"
+                class="block text-sm font-medium text-gray-700"
+                >Created Date *</label>
+              <input
+                type="text"
+                required
+                [(ngModel)] = "formTicketCreatedDate"
+                name="created_date"
+                id="created_date"
+                autocomplete="created_date"
+                disabled
+                class="uppercase mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+
+            </div>
+            <div class="sm:col-span-2">
+              <label
+                for="updated_date"
+                class="block text-sm font-medium text-gray-700"
+                >Updated Date *</label>
+              <input
+                type="text"
+                required
+                [(ngModel)] = "formTicketUpdatedDate"
+                name="updated_date"
+                id="updated_date"
+                autocomplete="updated_date"
+                disabled
+                class="uppercase mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+            </div>
+
+
+            <!-- <div class="sm:col-span-4">
+              <label
+                for="assign_to"
+                class="block text-sm font-medium text-gray-700"
+                >Assign To *</label>
+              <select
+                id="assign_to"
+                required
+                [(ngModel)] = "formSelectedAssignToEmployee"
+                (click)="setAssignToEmployeeMenu()"
+                (keyup)="setAssignToEmployeeMenu()"
+                name="assign_to"
+                autocomplete="assign_to"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              >
+                <option value=''>--Select Employee--</option>
+                <option *ngFor="let dept of allDepartmentDetails" [value]="dept.deptId">{{dept.deptName}} </option>
+              </select>
+            </div> -->
+
+            <div class="sm:col-span-6">
+              <label
+                for="ticketDetails"
+                class="block text-sm font-medium text-gray-700"
+                >Ticket Details *</label>
+              <textarea
+                required
+                [(ngModel)] = "formTicketDetails"
+                name="ticketDetails"
+                id="ticketDetails"
+                autocomplete="ticketDetails"
+                disabled
+                class="uppercase mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              ></textarea>
+            </div>
+          </div>
+          <div class="px-4 py-2 mt-5 -mb-3 bg-white text-right sm:px-6">
+            <button
+              type="button"
+              (click) = "onUpdateClicked()"
+              class="inline-flex justify-center py-2 px-4 -mr-6 border border-transparent shadow-sm text-sm font-medium rounded-xl text-white bg-green-700   focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              >
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
