@@ -1,4 +1,4 @@
-# Organizations Internal Ticket System
+# Organizations Ticket System
 
 Welcome to the repository for my Angular Organizations Internal Ticketing Portal, a robust system designed to streamline the operations of any organization by providing a sophisticated, role-based access control system. This application facilitates detailed management of departments, employees, and tickets, allowing for efficient task and personnel oversight tailored to specific roles within the company.
 
