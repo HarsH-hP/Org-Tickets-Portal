@@ -1,6 +1,30 @@
-# OrgTicketSystem
+# Organizations Internal Ticket System
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.4.
+Welcome to the repository for my Angular Organizations Internal Ticketing Portal, a robust system designed to streamline the operations of any organization by providing a sophisticated, role-based access control system. This application facilitates detailed management of departments, employees, and tickets, allowing for efficient task and personnel oversight tailored to specific roles within the company.
+
+- This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.4.
+
+## Features
+
+### Role-Based Access Control
+- **Admins**: Full control over all system features, including detailed management of departments and employees, along with comprehensive oversight of all tickets.
+
+- **Department Heads**: Manage specific department personnel and tickets, with additional capabilities similar to employees.
+- **Employees**: Can create, start, and close tickets, focusing on task execution and resolution.
+
+### Dynamic Management Systems
+- **Department Management**:
+  - Unique department creation with immutable Admin department attributes.
+  - Ability to update or delete non-admin departments with cascading updates across the system.
+
+- **Employee Management**:
+  - Create employee profiles with unique IDs and emails.
+  - Manage employee roles and department assignments with real-time updates.
+
+### Advanced Ticketing Interface
+- **Ticket Creation and Management**:
+  - Auto-generated, unique ticket IDs.
+  - Tailored ticket panels for Admins, Department Heads, and Employees, displaying relevant functionalities.
 
 ## Development server
 
