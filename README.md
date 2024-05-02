@@ -14,17 +14,19 @@ Welcome to the repository for my Angular Organizations Internal Ticketing Portal
 
 ### Dynamic Management Systems
 - **Department Management**:
-  - Unique department creation with immutable Admin department attributes.
-  - Ability to update or delete non-admin departments with cascading updates across the system.
+  - Admins can add new departments with unique IDs and names. The Admin department is protected against deletion and unauthorized edits, ensuring core structural integrity.
+  - Provides the flexibility to update or delete non-admin departments, with changes cascading through related employee profiles and tickets to ensure system-wide data consistency.
 
 - **Employee Management**:
-  - Create employee profiles with unique IDs and emails.
-  - Manage employee roles and department assignments with real-time updates.
+  - Allows for the creation of employee records with unique IDs and emails, with role assignments based on the selected department.
+  - Facilitates easy role transitions and department changes, with immediate updates reflected across the portal.
+  - Supports the deletion of employees, except for the logged-in user, to maintain operational security.
 
 ### Advanced Ticketing Interface
 - **Ticket Creation and Management**:
-  - Auto-generated, unique ticket IDs.
-  - Tailored ticket panels for Admins, Department Heads, and Employees, displaying relevant functionalities.
+  - Automated ticket ID generation prevents duplicates, enhancing data integrity.
+  - Tickets include essential details such as severity, assigned department, and comprehensive descriptions.
+  - Different panels for Admins, Department Heads, and Employees showcase tailored views and functionalities, ensuring users see only what they need to perform their roles effectively.
 
 ## Development server
 
