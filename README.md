@@ -28,6 +28,9 @@ Welcome to the repository for my Angular Organizations Internal Ticketing Portal
   - Tickets include essential details such as severity, assigned department, and comprehensive descriptions.
   - Different panels for Admins, Department Heads, and Employees showcase tailored views and functionalities, ensuring users see only what they need to perform their roles effectively.
 
+## Technologies Used:
+Angular · TypeScript · Tailwind CSS · Role-Based Access Control (RBAC) · Dynamic Data Management
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
